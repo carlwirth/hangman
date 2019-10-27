@@ -1,7 +1,6 @@
 # hangman 
 
-- Greetings and welcome.  
-- This was a project assignment for my JavaScript class. 
+- Greetings and welcome.  This was a project assignment for my JavaScript class. The program will pick a word from it's word bank.  You get to pick letters (a-z) that you believe match those in the selected word.  If you get the word right before you run out of guesses, YOU WIN.  Good luck and have fun.  
 
 Prerequisites
 - Copy my code into a fresh Visual Studio Code folder.  
