@@ -1,9 +1,10 @@
 # hangman 
 
-- Greetings and welcome.  This was a project assignment for my JavaScript class. 
+- Greetings and welcome.  
+- This was a project assignment for my JavaScript class. 
 
 Prerequisites
-- Copy my code into your Visual Studio Code file.  
+- Copy my code into a fresh Visual Studio Code folder.  
 - Name it hangman. 
 
 Getting Started / Deployment 
