@@ -12,5 +12,3 @@ if (readlineSync.keyInYNStrict("   Hit Y or N. ")) {
 } else {
     console.log("\n...sadness.\n   I'll miss you " + userName + '!' + "\n        Goodbye.")
 }
-
-console.log
