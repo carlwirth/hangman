@@ -1,8 +1,12 @@
 const prompt = require("readline-sync");
 const wordBank = require("./word-bank.json");
+const readlineSync = require("readline-sync");
 
-// this is where you are building your project. 
 
-console.log("\n Welcome to Hangman!\nPress ctrl+c to stop.\n");
+let userName = readlineSync.question('Hello. What is your name? ');
+console.log('Greetings ' + userName + '!');
 
-const letter = prompt.question("Pick a letter: ");
+console.log("\nSo, " + userName + ", do you want to play a game?");
+if (readlineSync.keyInYNStrict("Hit Y or N. ")) {
+    console.log("\nWelcome to Hangman, " + userName + ".\n(Press 'ctrl+c' to stop.)\n");
+}
