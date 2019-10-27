@@ -9,4 +9,8 @@ console.log('   Greetings ' + userName + '!');
 console.log("\nSo, " + userName + ", do you want to play a game?");
 if (readlineSync.keyInYNStrict("   Hit Y or N. ")) {
     console.log("\nWelcome to Hangman, " + userName + ".\n   (Press 'ctrl+c' to stop.)\n");
+} else {
+    console.log("\n...sadness. I'll miss you " + userName + '!' + " Goodbye.")
 }
+
+console.log
