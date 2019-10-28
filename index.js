@@ -36,14 +36,21 @@ const letter = prompt.question(userName + ", please guess a letter: ");
 letterA = letter.split('');
 console.log(letterA[0]);
 
-function letterChecker(letterA) {
-    let letterChecker = /^[A-Za-z]+$/;
-    if (letterA.value.match(letterChecker)) {
-        console.log("Thank you.")
-    } else {
-        console.log("Sorry " + userName + " you must select alphabet characters only. ")
-    }
-};
+let letterB = (letterA[0]);
+
+// function letterChecker(letterB) {
+let letterChecker = /^[A-Za-z]+$/;
+// let letterChecker = ("^[A - Za - z]");
+// if (!/^[A-Za-z]*$/g.test(letterB)) {
+// if (letterB.value.match(letterChecker)) {
+
+// if (!letterB = ("[a-zA-Z]")) {
+if (letterB.match(letterChecker)) {
+    console.log("Thank you.")
+} else {
+    console.log("Sorry " + userName + " you must select alphabet characters only. ")
+}
+
 
 
 // {sensitivity, 'base'}
