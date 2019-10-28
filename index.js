@@ -32,6 +32,20 @@ for (let i = 0; i < (myRandomElement.length); i++) {
 
 const letter = prompt.question(userName + ", please guess a letter: ");
 
+// let letterA = [];
+letterA = letter.split('');
+console.log(letterA[0]);
+
+function letterChecker(letterA) {
+    let letterChecker = /^[A-Za-z]+$/;
+    if (letterA.value.match(letterChecker)) {
+        console.log("Thank you.")
+    } else {
+        console.log("Sorry " + userName + " you must select alphabet characters only. ")
+    }
+};
+
+
 // {sensitivity, 'base'}
 
 // for (let i = letterCount + 6; i > 0; i--) {
