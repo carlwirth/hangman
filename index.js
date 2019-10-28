@@ -7,11 +7,13 @@ let userName = readlineSync.question('\nHello. What is your name? ');
 console.log('   Greetings ' + userName + '!');
 
 console.log("\nSo, " + userName + ", would you like to play a game?");
+
 if (readlineSync.keyInYNStrict("   Hit Y or N. ")) {
     console.log("\nWelcome to Hangman, " + userName + ".\n   (Press 'ctrl+c' to stop.)\n");
 } else {
-    console.log("\n...sadness.\n   I'll miss you " + userName + '!' + "\n        Goodbye.")
-}
+    console.log("\n...sadness.\n   I'll miss you " + userName + '!' + "\n        Goodbye.");
+    process.exit()
+};
 
 Array.prototype.randomElement = function() {
     return this[Math.floor(Math.random() * this.length)]
@@ -30,14 +32,15 @@ for (let i = 0; i < (myRandomElement.length); i++) {
 
 const letter = prompt.question(userName + ", please guess a letter: ");
 
+// {sensitivity, 'base'}
 
-// for (let i = letterCount; i > 0; i--) {
+// for (let i = letterCount + 6; i > 0; i--) {
 //     console.log(userName + ', you have ' + i + 'guesses left.')
 // };
 
-console.log("\n " + userName + ", would you like to play again?");
-if (readlineSync.keyInYNStrict("   Hit Y or N. ")) {
-    console.log("\nWelcome back, " + userName + ".\n   (Press 'ctrl+c' to stop.)\n");
-} else {
-    console.log("\n...sadness.\n   I'll miss you " + userName + '!' + "\n        Goodbye.")
-};
+// console.log("\n " + userName + ", would you like to play again?");
+// if (readlineSync.promptLoop("   Hit Y or N. ")) {
+//     console.log("\nWelcome back, " + userName + ".\n   (Press 'ctrl+c' to stop.)\n");
+// } else {
+//     console.log("\n...sadness.\n   I'll miss you " + userName + '!' + "\n        Goodbye.")
+// };
