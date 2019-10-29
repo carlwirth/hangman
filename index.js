@@ -25,26 +25,21 @@ console.log("'" + myRandomElement + "' is the magic word. (I'll hide it later.)\
 
 console.log("'" + myRandomElement + "' has " + myRandomElement.length + " letters in it. \n");
 
-
+let display = "";
 for (let i = 0; i < (myRandomElement.length); i++) {
-    console.log(" _ ");
+    display += " _ ";
 };
+console.log(display);
 
 const letter = prompt.question(userName + ", please guess a letter: ");
 
-// let letterA = [];
 letterA = letter.split('');
 console.log(letterA[0]);
 
 let letterB = (letterA[0]);
 
-// function letterChecker(letterB) {
 let letterChecker = /^[A-Za-z]+$/;
-// let letterChecker = ("^[A - Za - z]");
-// if (!/^[A-Za-z]*$/g.test(letterB)) {
-// if (letterB.value.match(letterChecker)) {
 
-// if (!letterB = ("[a-zA-Z]")) {
 if (letterB.match(letterChecker)) {
     console.log("Thank you.")
 } else {
@@ -53,7 +48,6 @@ if (letterB.match(letterChecker)) {
 
 
 
-// {sensitivity, 'base'}
 
 // for (let i = letterCount + 6; i > 0; i--) {
 //     console.log(userName + ', you have ' + i + 'guesses left.')
