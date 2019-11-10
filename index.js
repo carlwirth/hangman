@@ -2,123 +2,193 @@ const prompt = require("readline-sync");
 const wordBank = require("./word-bank.json");
 const readlineSync = require("readline-sync");
 
+// if (javaScript = annoying) {
+//     computer.throw(outWindow)
+// };
+
+// reverse the commenting here later 
+//   ( lines 7 off & 8 on )
+let hiddenWord = "hangman";
+// let hiddenWord = wordBank.randomElement();
+
+let playerGuesses = 6;
+let alreadyguessed = [];
+let goodLetter = [];
+let badLetter = [];
+// let guesses = [];
+
+
+// playHangman();
+
+// function playHangman() {
+
+
+// body parts
+let top = "_______";
+let rope = "|     |";
+let pole = "|"; // 5
+let platform = "_________";
+let head = "     o";
+let body = "     |";
+let leftArm = "    /|\\";
+let rightArm = "    /|";
+let leg1 = "    / \\";
+let leg2 = "    /";
+
+// if (javaScript = annoying) {
+//     computer.throw(outWindow)
+// };
+
+// function playHangman() {
+
 
 let userName = readlineSync.question('\nHello. What is your name? ');
+
+
+// function playHangman() {
+//     while (playerGuesses > 0) {
+//     }
+// }
+
+// function playHangman() {
+
+// let userName = readlineSync.question('\nHello. What is your name? ');
 console.log('   Greetings ' + userName + '!');
 
 console.log("\nSo, " + userName + ", would you like to play a game?");
 
-if (readlineSync.keyInYNStrict("   Hit Y or N. ")) {
+console.log(top);
+console.log(rope);
+console.log(pole);
+console.log(pole);
+console.log(pole);
+console.log(pole);
+console.log(platform);
+
+
+if (readlineSync.keyInYNStrict("\n   Hit Y or N. ")) {
     console.log("\nWelcome to Hangman, " + userName + ".\n   (Press 'ctrl+c' to stop.)\n");
 } else {
     console.log("\n...sadness.\n   I'll miss you " + userName + '!' + "\n        Goodbye.");
     process.exit()
 };
 
-// Carl's current code thoughts... Different strategy attempt. 
-
-// Array.prototype.randomElement = function() {
-//     return this[Math.floor(Math.random() * this.length)]
-// };
-
-// let myRandomElement = wordBank.randomElement();
-
-// // The following code creates an array from the randomly chosen word above.
-// const guessWord = [myRandomElement];
-// console.log(guessWord);
-
-
-// console.log("Your word has been chosen. It has " + myRandomElement.length + " letters in it.\n");
-
-// let display = "";
-// for (let i = 0; i < (myRandomElement.length); i++) {
-//     display += "_ ";
-// };
-// console.log(display);
-
-// console.log("\n" + userName + ", let's begin.");
-
-// // The following code is incomplete; in the future it will check for a single letter in myRandomElement.
-// input = readlineSync.question("\nChoose a letter: ");
-// if (input = myRandomElement) {
-//     console.log("\nYou win!");
-//     process.exit();
-// } else {
-//     console.log("\nSorry... That's wrong.");
-//     process.exit();
-// };
-
-// My earlier code thoughts...
+// function playHangman() {
 
 Array.prototype.randomElement = function() {
     return this[Math.floor(Math.random() * this.length)]
 };
 
-let myRandomElement = wordBank.randomElement();
+console.log("... '" + hiddenWord + "' is the magic word. (I'll hide it later.)\n ");
 
-console.log("... '" + myRandomElement + "' is the magic word. (I'll hide it later.)\n ");
+console.log("Your word has been chosen. It has " + hiddenWord.length + " letters in it.\n" + "   You only get six wrong guesses.\n" + "    Choose wisely young one. \n");
 
-console.log("Your word has been chosen. It has " + myRandomElement.length + " letters in it.\n");
 
-let display = "";
-for (let i = 0; i < (myRandomElement.length); i++) {
-    display += " _ ";
-};
-console.log(display);
+// creating the magic dash line up.
+let wordToGuess = [];
+hiddenWord.split("").forEach(letterInHiddenWord => wordToGuess.push("_"));
+console.log(wordToGuess);
 
-const letter = prompt.question(userName + ", please guess a letter: ");
+// for (let isGuessCorrect = 5; isGuessCorrect > 0; isGuessCorrect--) {
+let wrongGuess = 6;
+while (wrongGuess !== 0) {
+    // if (wordToGuess === hiddenWord) {
+    //     console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n")
+    // }
 
-letterA = letter.split('');
+    const userInput = prompt.question("\n" + userName + ", please guess a letter: ");
 
-let letterB = (letterA[0]);
+    letterA = userInput.split('');
 
-let letterChecker = /^[A-Za-z]+$/;
+    let letter = (letterA[0]);
 
-if (letterB.match(letterChecker)) {
-    console.log("You selected " + (letterB) + ".");
-} else {
-    console.log("Sorry " + userName + " you must select alphabet characters only. ")
-}
+    // let letterChecker = /^[A-Za-z]+$/;
 
-const splitArr = myRandomElement.split("");
-// let test = myRandomElement.match(/letterB/gi); 
+    if (/[a-zA-Z]/.test(letter)) {
 
-myRandomElement.split("").forEach((letter, letterIndex) => {
-    let x = myRandomElement.find(letterB => letterB === letter);
-    if (x) {
-        display[letterIndex] = x
+        // if (letterB.match(letterChecker)) {
+        console.log("\n You selected " + (letter) + ".\n");
+    } else {
+        console.log("\n Sorry " + userName + " you must select alphabet characters (a-z) only. ")
+    };
+
+
+    if (alreadyguessed.includes(letter)) {
+        // alreadyguessed +1;
+        console.log("Sorry, " + userName + " you have already tried that letter.");
+
+    } else {
+        alreadyguessed.push(letter);
+        console.log("\n Nice guess.");
+    };
+
+    // add guesses to inventory of tries.
+    // alreadyguessed.push(letter);
+    console.log("\n Your guesses so far: [ " + alreadyguessed + ", " + "]\n");
+
+    let lookForLetterInWord2 = () => {
+        // console.log('inside lookFOrLEtterWOrd function')
+        let wrongGuess = true;
+        hiddenWord.split('').forEach((letterInHiddenWord, indexOfLetter) => {
+            if (letter === letterInHiddenWord) {
+                wordToGuess[indexOfLetter] = letterInHiddenWord
+                wrongGuess = false;
+                wordToGuess[indexOfLetter] = letter;
+                // console.log('adding the incorrect letter')
+                // 
+            }
+        });
+        if (wrongGuess) {
+            // (wrongGuess - 1);
+            console.log("Sorry " + userName + ", that was not correct. \n")
+        }
+        if (!wrongGuess) {
+            console.log(wordToGuess);
+            console.log("That was a good guess! Keep going! \n");
+        }
+
+    };
+
+    // if (javaScript = annoying) {
+    //     computer.throw(outWindow)
+    // };
+
+
+    lookForLetterInWord2()
+
+    if (wordToGuess === hiddenWord) {
+        console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n")
+
+
+    } else {
+        --wrongGuess;
+        console.log("End of guesses");
+        console.log("End of game.  Please try again. \n")
     }
-});
-
-for (let i = 0; i < (myRandomElement.length); i++) {
-    if (letterB.match(test)) {
-        console.log(letterB += " _ " + letterB)
-    } else {
-        console.log("Sorry " + userName + ", please pick again. \n");
-    };
-
-
-    let letterCount = (myRandomElement.length);
-
-    for (let g = ((letterCount - letterB) + 6); g > 0; g--) {
-        let h = (g - letterB);
-        console.log(userName + ', you have ' + g + 'guesses left.')
-    };
-
-    // console.log(test);
-
-    console.log("\n " + userName + ", would you like to play again?");
-    if (readlineSync.promptLoop("   Hit Y or N. ")) {
-        console.log("\nWelcome back, " + userName + ".\n   (Press 'ctrl+c' to stop.)\n");
-    } else {
-        console.log("\n...sadness.\n   I'll miss you " + userName + '!' + "\n        Goodbye.");
-    };
 };
+// lookForLetterInWord2()
 
-// theWord = [r, o, b];
-// hiddenWord = [ * , * , * ];
-// theWord.split("").forEach((letter, letterIndex) => {
-//     let x = theWord.find(oneLetter => oneLetter === letter);
-// if (x) {
-//         hiddenWord[letterIndex] = x;
-//     };
+// console.log("End of guesses");
+// console.log("End of game.  Please try again. \n")
+
+
+
+// let lookForLetterInWord2 = () => {
+//     hiddenWord.split('').forEach((letterInHiddenWord, indexOfLetter) => {
+//         if (letter === letterInHiddenWord) {
+//             wordToGuess[indexOfLetter] = letterInHiddenWord
+//         } else {
+// console.log("Sorry " + userName + ", that was not correct. \n")
+//         };
+//     });
+// };
+
+
+
+// };
+
+// while (goodLetter.indexOf('_') !== -1 && playerGuesses > 0) {
+
+//     console.log("Number of tries left = " + playerGuesses);
+//     console.log(wordToGuess.join(" "))
+// }
