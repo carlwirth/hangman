@@ -4,17 +4,14 @@ const readlineSync = require("readline-sync");
 
 // if (javaScript = annoying) {
 //     computer.throw(outWindow)
-// };
+// }; 
+// console.log("sorry-couldn't-help it.");
 
 Array.prototype.randomElement = function() {
     return this[Math.floor(Math.random() * this.length)]
 };
 
-// reverse the commenting here later 
-//   ( lines 7 off & 8 on )
-// let hiddenWord = "hangman";
 let hiddenWord = wordBank.randomElement();
-
 
 let roundsTotal = 0;
 let alreadyguessed = [];
@@ -23,57 +20,96 @@ let badLetter = [];
 let gamesPlayed = 0;
 let gamesWon = 0;
 
-// let guesses = [];
-// let hiddenStr = wordToGuess.reduce
-
-// playHangman();
-
-// function playHangman() {
-
 
 // body parts
 let top = "_______";
 let rope = "|     |";
-let pole = "|"; // 5
+let pole = "|     "; // 5
 let platform = "_________";
-let head = "     o";
-let body = "     |";
-let leftArm = "    /|\\";
-let rightArm = "    /|";
-let leg1 = "    / \\";
-let leg2 = "    /";
-
-// if (javaScript = annoying) {
-//     computer.throw(outWindow)
-// };
-
-
-// function playHangman() {
+let head = "|     o";
+let body = "|     |";
+let leftArm = "|    /|\\";
+let rightArm = "|    /|";
+let leg1 = "|    / \\";
+let leg2 = "|    /";
 
 let userName = readlineSync.question('\nHello. What is your name? ');
 
 
 
-// function playHangman() {
-//     while (playerGuesses > 0) {
-//     }
-// }
-
-// function playHangman() {
-
-// let userName = readlineSync.question('\nHello. What is your name? ');
 console.log('   Greetings ' + userName + '!');
 
 console.log("\nSo, " + userName + ", would you like to play a game?");
+console.log(top)
+console.log(rope)
+console.log(pole)
+console.log(pole)
+console.log(pole)
+console.log(platform)
+console.log("HANGMAN - The Game")
 
-console.log(top);
-console.log(rope);
-console.log(pole);
-console.log(pole);
-console.log(pole);
-console.log(pole);
-console.log(platform);
+const drawMan = (wrongGuess) => {
+    if (wrongGuess === 5) {
+        console.log(top)
+        console.log(rope)
+        console.log(pole)
+        console.log(pole)
+        console.log(pole)
+        console.log(platform)
+    }
+    if (wrongGuess === 4) {
+        console.log(top)
+        console.log(rope)
+        console.log(head)
+        console.log(pole)
+        console.log(pole)
+        console.log(platform)
+    }
+    if (wrongGuess === 3) {
+        console.log(top)
+        console.log(rope)
+        console.log(head)
+        console.log(body)
+        console.log(pole)
+        console.log(platform)
+    }
+    if (wrongGuess === 2) {
+        console.log(top)
+        console.log(rope)
+        console.log(head)
+        console.log(rightArm)
+        console.log(pole)
+        console.log(platform)
+    }
+    if (wrongGuess === 1) {
+        console.log(top)
+        console.log(rope)
+        console.log(head)
+        console.log(leftArm)
+        console.log(pole)
+        console.log(platform)
+    }
+    if (wrongGuess === 0) {
+        console.log(top)
+        console.log(rope)
+        console.log(head)
+        console.log(leftArm)
+        console.log(leg2)
+        console.log(platform)
+    }
+    if (wrongGuess === 0) {
+        console.log(top)
+        console.log(rope)
+        console.log(head)
+        console.log(rightArm)
+        console.log(leg1)
+        console.log(platform)
+    }
 
+
+};
+
+drawMan();
 
 if (readlineSync.keyInYNStrict("\n   Hit Y or N. ")) {
     console.log("\nWelcome to Hangman, " + userName + ".\n");
@@ -82,20 +118,11 @@ if (readlineSync.keyInYNStrict("\n   Hit Y or N. ")) {
     process.exit()
 };
 
-// function playHangman() {
 
 ++roundsTotal;
-// gamesPlayed += 1;
 while (!gamesWon && !gamesPlayed) {
-    console.log(hiddenWord);
     console.log(userName + ", so far, you have won " + gamesWon + ", out of " + gamesPlayed + " games.");
     console.log("(Press 'ctrl+c' to stop.)\n")
-
-    // hiddenWord = wordBank.randomElement();
-
-    // Array.prototype.randomElement = function() {
-    //     return this[Math.floor(Math.random() * this.length)]
-    // };
 
     console.log("... '" + hiddenWord + "' is the magic word. (I'll hide it later.)\n ");
 
@@ -107,11 +134,18 @@ while (!gamesWon && !gamesPlayed) {
     hiddenWord.split("").forEach(letterInHiddenWord => wordToGuess.push("_"));
     console.log(wordToGuess);
 
-    // let hiddenStr = wordToGuess.reduce
 
-    // for (let isGuessCorrect = 5; isGuessCorrect > 0; isGuessCorrect--) {
     let wrongGuess = 6;
+
     while (wrongGuess !== 0) {
+        drawMan(wrongGuess);
+        // console.log(wrongGuess); (Left this in for right now while finish tweaking code.)
+        const foundWord = wordToGuess.find(function(element) {
+            return element === "_";
+        });
+
+        if (!foundWord) break;
+
         if (wordToGuess === hiddenWord) {
             console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n")
             break;
@@ -120,17 +154,17 @@ while (!gamesWon && !gamesPlayed) {
         const userInput = prompt.question("\n" + userName + ", please guess a letter: ");
 
         letterA = userInput.split('');
-
         let letter = (letterA[0]);
 
-        // let letterChecker = /^[A-Za-z]+$/;
+        // if (javaScript = non-intuitive) {
+        //     computer.close(goPlayOutdoors)
+        // };
 
         if (/[a-zA-Z]/.test(letter)) {
-
-            // if (letterB.match(letterChecker)) {
             console.log("\n You selected " + (letter) + ".\n");
         } else {
             console.log("\n Sorry " + userName + " you must select alphabet characters (a-z) only. ")
+            break;
         };
 
 
@@ -140,13 +174,10 @@ while (!gamesWon && !gamesPlayed) {
 
         } else {
             alreadyguessed.push(letter);
-            // console.log("\n Nice guess.");
         };
 
         // add guesses to inventory of tries.
         console.log("\n Your guesses so far: [ " + alreadyguessed + ", " + "]\n");
-
-        let hiddenStr = wordToGuess.reduce
 
 
         let lookForLetterInWord2 = () => {
@@ -169,32 +200,21 @@ while (!gamesWon && !gamesPlayed) {
 
         };
 
-        // if (javaScript = annoying) 😧  {
-        //     computer.throw(outWindow)
-        //     😱 
-        // };  
-
-
         lookForLetterInWord2()
 
-        if (wordToGuess !== hiddenStr) {
-            // if (wordToGuess !== hiddenWord) {
+        if (wordToGuess !== hiddenWord) {
             --wrongGuess;
 
 
-            // console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n")
-            // break;
-
-
         } else {
-            // --wrongGuess;
-            // if (hiddenWord.split === wordToGuess) break;
-            if (wordToGuess === hiddenStr)
+
+            if (wordToGuess === hiddenWord)
                 ++gamesWon;
-            // break;
+
             console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n")
-                // break;
+
             hiddenWord = wordBank.randomElement();
+            break;
 
         }
         ++gamesPlayed;
@@ -204,3 +224,10 @@ while (!gamesWon && !gamesPlayed) {
     console.log("End of guesses");
     console.log("End of game. \n");
 };
+
+// if (hangMan = finished || Perhaps) {
+//     computer.close(goPlayOutdoors)
+// } else {
+//     (makeCocoa || tryAgain);
+//      console.log(tellMissAmerica = BeLate);
+// };
