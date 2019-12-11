@@ -2,10 +2,6 @@ const prompt = require("readline-sync");
 const wordBank = require("./word-bank.json");
 const readlineSync = require("readline-sync");
 
-// if (javaScript = annoying) {
-//     computer.throw(outWindow)
-// }; 
-// console.log("sorry-couldn't-help it.");
 
 Array.prototype.randomElement = function() {
     return this[Math.floor(Math.random() * this.length)]
@@ -24,7 +20,7 @@ let gamesWon = 0;
 // body parts
 let top = "_______";
 let rope = "|     |";
-let pole = "|     "; // 5
+let pole = "|     ";
 let platform = "_________";
 let head = "|     o";
 let body = "|     |";
@@ -49,10 +45,19 @@ console.log(platform)
 console.log("HANGMAN - The Game")
 
 const drawMan = (wrongGuess) => {
-    if (wrongGuess === 5) {
+    console.log(wrongGuess)
+    if (wrongGuess === 6) {
         console.log(top)
         console.log(rope)
         console.log(pole)
+        console.log(pole)
+        console.log(pole)
+        console.log(platform)
+    }
+    if (wrongGuess === 5) {
+        console.log(top)
+        console.log(rope)
+        console.log(head)
         console.log(pole)
         console.log(pole)
         console.log(platform)
@@ -61,7 +66,7 @@ const drawMan = (wrongGuess) => {
         console.log(top)
         console.log(rope)
         console.log(head)
-        console.log(pole)
+        console.log(body)
         console.log(pole)
         console.log(platform)
     }
@@ -69,7 +74,7 @@ const drawMan = (wrongGuess) => {
         console.log(top)
         console.log(rope)
         console.log(head)
-        console.log(body)
+        console.log(rightArm)
         console.log(pole)
         console.log(platform)
     }
@@ -77,19 +82,11 @@ const drawMan = (wrongGuess) => {
         console.log(top)
         console.log(rope)
         console.log(head)
-        console.log(rightArm)
-        console.log(pole)
-        console.log(platform)
-    }
-    if (wrongGuess === 1) {
-        console.log(top)
-        console.log(rope)
-        console.log(head)
         console.log(leftArm)
         console.log(pole)
         console.log(platform)
     }
-    if (wrongGuess === 0) {
+    if (wrongGuess === 1) {
         console.log(top)
         console.log(rope)
         console.log(head)
@@ -101,7 +98,7 @@ const drawMan = (wrongGuess) => {
         console.log(top)
         console.log(rope)
         console.log(head)
-        console.log(rightArm)
+        console.log(leftArm)
         console.log(leg1)
         console.log(platform)
     }
@@ -129,7 +126,6 @@ while (!gamesWon && !gamesPlayed) {
     console.log("Your word has been chosen. It has " + hiddenWord.length + " letters in it.\n" + "   You only get six wrong guesses.\n" + "    Choose wisely young one. \n");
 
 
-    // creating the magic dash line up.
     let wordToGuess = [];
     hiddenWord.split("").forEach(letterInHiddenWord => wordToGuess.push("_"));
     console.log(wordToGuess);
@@ -138,8 +134,7 @@ while (!gamesWon && !gamesPlayed) {
     let wrongGuess = 6;
 
     while (wrongGuess !== 0) {
-        drawMan(wrongGuess);
-        // console.log(wrongGuess); (Left this in for right now while finish tweaking code.)
+        //  drawMan(wrongGuess);
         const foundWord = wordToGuess.find(function(element) {
             return element === "_";
         });
@@ -156,9 +151,6 @@ while (!gamesWon && !gamesPlayed) {
         letterA = userInput.split('');
         let letter = (letterA[0]);
 
-        // if (javaScript = non-intuitive) {
-        //     computer.close(goPlayOutdoors)
-        // };
 
         if (/[a-zA-Z]/.test(letter)) {
             console.log("\n You selected " + (letter) + ".\n");
@@ -181,19 +173,21 @@ while (!gamesWon && !gamesPlayed) {
 
 
         let lookForLetterInWord2 = () => {
-            let wrongGuess = true;
+            let isWrongGuess = true;
             hiddenWord.split('').forEach((letterInHiddenWord, indexOfLetter) => {
                 if (letter === letterInHiddenWord) {
                     wordToGuess[indexOfLetter] = letterInHiddenWord
-                    wrongGuess = false;
+                    isWrongGuess = false;
                     wordToGuess[indexOfLetter] = letter;
 
                 }
             });
-            if (wrongGuess) {
+            if (isWrongGuess) {
                 console.log("Sorry " + userName + ", that was not correct. \n")
+                drawMan(wrongGuess);
+                --wrongGuess;
             }
-            if (!wrongGuess) {
+            if (!isWrongGuess) {
                 console.log(wordToGuess);
                 console.log("That was a good guess! Keep going! \n");
             }
@@ -203,7 +197,7 @@ while (!gamesWon && !gamesPlayed) {
         lookForLetterInWord2()
 
         if (wordToGuess !== hiddenWord) {
-            --wrongGuess;
+            //  --wrongGuess;
 
 
         } else {
@@ -217,17 +211,14 @@ while (!gamesWon && !gamesPlayed) {
             break;
 
         }
+
         ++gamesPlayed;
+
     };
 
+    drawMan(wrongGuess);
+    console.log("   End of guesses.");
+    console.log("        End of game.");
+    console.log("Sorry " + userName + ", but we had fun, yes?? \n")
 
-    console.log("End of guesses");
-    console.log("End of game. \n");
 };
-
-// if (hangMan = finished || Perhaps) {
-//     computer.close(goPlayOutdoors)
-// } else {
-//     (makeCocoa || tryAgain);
-//      console.log(tellMissAmerica = BeLate);
-// };
