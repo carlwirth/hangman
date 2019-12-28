@@ -102,11 +102,11 @@ drawMan();
 
 let userName = readlineSync.question("\n What is your name? ");
 
-console.log("\n       Hello " + userName + ", would you like to play a game?");
+console.log("\n       Greetings " + userName + ".  Would you like to play a game?");
 if (readlineSync.keyInYNStrict("                     Hit Y or N. ")) {
 
-    console.log("\nWelcome to Hangman, " + userName + ".\n");
-    console.log("(Press 'ctrl+c' at any time to stop.)\n");
+    console.log("\nWelcome to Hangman, " + userName + ".");
+    // console.log(" 109  (Press 'ctrl+c' at any time to stop.)\n");
 
 } else {
     console.log("\n...sadness.\n   I'll miss you " + userName + "!" + "\n        Goodbye.");
@@ -129,21 +129,22 @@ function startgame() {
 
 
     // this is a test console.log --  Kill it out later. 
-    console.log("games won", gamesWon);
+    // console.log("games won(132)", gamesWon);
 
     ++roundsTotal;
 
-    console.log(userName + ", so far, you have won " +
-        gamesWon + ", out of " + gamesPlayed + " games.");
+    console.log(" " + userName + ", so far, you have won " + gamesWon + ", out of " + gamesPlayed + " games played.");
+    console.log("     ***(Press 'ctrl+c' at any time to stop.)*** \n");
+
 
     // Carl, take this out before finalizing. 
     console.log("\n  ... '" + hiddenWord + "' is the magic word. (I'll hide it later.)\n ");
 
     // let hiddenWord2 = hiddenWord;
 
-    console.log("Your word has been chosen. It has " +
-        hiddenWord.length + " letters in it.\n" +
-        "   You only get six wrong guesses. So, please choose wisely young one. \n");
+    console.log("Your word has been chosen.");
+    console.log("It has " + hiddenWord.length + " letters in it.");
+    console.log("You only get six wrong guesses. So, please choose wisely. \n");
 
 
     let wordToGuess = [];
@@ -160,12 +161,14 @@ function startgame() {
         });
 
 
-        if (!foundWord) break;
-        if (wordToGuess === hiddenWord2) {
-            gamesWon++;
-            console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n");
-            break;
-        }
+        // if (!foundWord) break;
+        // if (wordToGuess === hiddenWord2) {
+        //     console.log("165" + gamesWon);
+        //     gamesWon++;
+        //     console.log("167" + gamesWon);
+        //     console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n");
+        //     break;
+        // }
 
 
         const userInput = prompt.question("\n" + userName + ", please guess a letter: ");
@@ -209,12 +212,10 @@ function startgame() {
 
 
         lookForLetterInWord2();
-        if (wordToGuess !== hiddenWord) {} else {
-
-            if (wordToGuess === hiddenWord) {
+        if (wordToGuess.join('') === hiddenWord) {
+            if (wordToGuess.join('') === hiddenWord) {
                 gamesWon++;
-
-                console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n");
+                console.log("\n WELL DONE, " + userName + ", great job..!!!\n");
                 // ++gamesWon
                 break;
             }
@@ -237,24 +238,23 @@ function startgame() {
 
     };
 
-    // Another attempt to count the number of winning games. 
-    if (wordToGuess === hiddenWord2) {
-        gamesWon++;
-        console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n");
-    };
 
-
+    // console.log("   End of guesses.");
+    console.log("        End of this round.");
     drawMan(wrongGuess);
-    console.log("   End of guesses.");
-    console.log("        End of game.");
+    // console.log("   End of guesses.");
+    // console.log("        End of game.");
     console.log(" The word was " + hiddenWord + ".")
-    console.log("\n Sooo..." + userName + ", would you like to play again?");
 
-    // this is a test log --  Kill it out later. 
-    console.log("\ngames won", gamesWon);
+    console.log("\n So far, " + userName + ", you have won " + gamesWon + " games. ");
+    console.log("Would you like to play another exciting round? ")
+        // this is a test log --  Kill it out later. 
+        // console.log("\nGames won: ", gamesWon);
 
-    let response = readlineSync.question("                                       Hit y for another exiting round. ");
-    if (response === "y") {
+    if (readlineSync.keyInYNStrict("     Hit Y or N. ")) {
+
+        // let response = readlineSync.question("                                       Hit y for another exiting round. ");
+        // if (response === "y") {
 
         gamesPlayed++;
         startgame();
