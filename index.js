@@ -28,6 +28,7 @@ let leg2 = "|    /";
 //  Adding space between node and start of game. 
 console.log("\n \n \n \n ");
 
+
 //  Gallows demo.
 console.log(top);
 console.log(rope);
@@ -99,9 +100,9 @@ const drawMan = wrongGuess => {
     }
 };
 
+//  Intro
 drawMan();
 console.log("HANGMAN - The Game ");
-
 let userName = readlineSync.question("\nWhat is your name? ");
 
 console.log("\n \n \n \nGreetings " + userName + ".");
@@ -123,33 +124,17 @@ if (readlineSync.keyInYNStrict("          Hit Y or N. ")) {
 };
 
 
-// drawMan();
-
 startgame();
 
 function startgame() {
 
     let alreadyguessed = [];
     let hiddenWord = wordBank.randomElement();
-
-    // Another attempt to count the number of winning games. 
-    // THis is an attempt to use hiddenWord2 as a way to capture hidden word before it gets split. Just in case that is the problem.
     let hiddenWord2 = hiddenWord;
-
-
-    // this is a test console.log --  Kill it out later. 
-    // console.log("games won(132)", gamesWon);
 
     ++roundsTotal;
 
-    // console.log(" " + userName + ", so far, you have won " + gamesWon + ", out of " + gamesPlayed + " games played.");
     drawMan();
-    // console.log("142     ***(Press 'ctrl+c' at any time to stop.)*** \n");
-
-
-    // // Carl, take this out before finalizing. 
-    // console.log("\n  ... '" + hiddenWord + "' is the magic word. (I'll hide it later.)\n ");
-
 
     console.log("\n\nYour word has been chosen. It has " + hiddenWord.length + " letters in it.");
     console.log("Now, you only get six wrong guesses.  So, please, choose wisely. \n");
@@ -171,16 +156,6 @@ function startgame() {
         });
 
 
-        // if (!foundWord) break;
-        // if (wordToGuess === hiddenWord2) {
-        //     console.log("165" + gamesWon);
-        //     gamesWon++;
-        //     console.log("167" + gamesWon);
-        //     console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n");
-        //     break;
-        // }
-
-
         const userInput = prompt.question("\n" + userName + ", please guess a letter: ");
         letterA = userInput.split("");
         let letter = letterA[0];
@@ -189,13 +164,15 @@ function startgame() {
         } else {
             console.log("\n Sorry " + userName + " you must select alphabet characters (a-z) only. ");
             break;
-        }
+        };
+
 
         if (alreadyguessed.includes(letter)) {
             console.log("Sorry, " + userName + " you have already tried that letter.");
         } else {
             alreadyguessed.push(letter);
-        }
+        };
+
 
         // add guesses to inventory of tries.
         console.log("\n Your guesses so far: [ " + alreadyguessed + ", " + "]\n");
@@ -228,30 +205,12 @@ function startgame() {
                 break;
             }
         };
-
-
-        // Another attempt to count the number of winning games. 
-        // if (wordToGuess !== hiddenWord) {} else {
-
-        //     if (wordToGuess === hiddenWord) {
-        //         gamesWon++;
-
-        //         console.log("\n WELL DONE..!!!" + userName + ", Great job..!!!\n");
-        //         // ++gamesWon
-        //         // break;
-        //     }
-        //     // ++gamesWon
-
-        // };
-
     };
 
 
-    // console.log("   End of guesses.");
     console.log("That is the end of this round.");
     drawMan(wrongGuess);
-    // console.log("   End of guesses.");
-    // console.log("        End of game.");
+
     console.log("\n(The hidden word was " + hiddenWord + ".) \n\n");
     gamesPlayed++;
 
