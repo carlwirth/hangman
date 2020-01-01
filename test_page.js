@@ -172,6 +172,11 @@ function startgame() {
         }
 
 
+
+        // pickLetter();
+
+        // function pickLetter() {
+
         const userInput = prompt.question("\n" + userName + ", please guess a letter: ");
         letterA = userInput.split("");
         let letter = letterA[0];
@@ -180,7 +185,11 @@ function startgame() {
         } else {
             console.log("\n Sorry " + userName + " you must select alphabet characters (a-z) only. ");
             break;
+            // pickLetter();
+
         }
+        // };
+
 
         if (alreadyguessed.includes(letter)) {
             console.log("Sorry, " + userName + " you have already tried that letter.");
