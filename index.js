@@ -103,9 +103,9 @@ const drawMan = wrongGuess => {
 //  Intro
 drawMan();
 console.log("HANGMAN - The Game ");
-let userName = readlineSync.question("\nWhat is your name? ");
+let userName = readlineSync.question("\nWhat is your name? \x1b[33m");
 
-console.log("\n \n \n \nGreetings " + userName + ".");
+console.log("\x1b[37m\n \n \n \nGreetings " + userName + ".");
 console.log("Would you like to play a game?");
 if (readlineSync.keyInYNStrict("          Hit Y or N. ")) {
 
@@ -116,10 +116,10 @@ if (readlineSync.keyInYNStrict("          Hit Y or N. ")) {
     console.log("     " + pole);
     console.log("     " + pole);
     console.log("     " + platform);
-    console.log("\n***(Press 'ctrl+c' at any time to stop.)*** \n");
 
 } else {
-    console.log("\n...sadness.\n   I'll miss you " + userName + "!" + "\n        Goodbye.");
+    console.log("\x1b[35m\n...sadness.");
+    console.log("\x1b[37m   I'll miss you " + userName + "!" + "\n        Goodbye. \n\n");
     process.exit();
 };
 
@@ -137,10 +137,10 @@ function startgame() {
     drawMan();
 
     console.log("\n\nYour word has been chosen. It has " + hiddenWord.length + " letters in it.");
-    console.log("Now, you only get six wrong guesses.  So, please, choose wisely. \n");
+    console.log("Now, be careful.  You only get six wrong guesses.  So, please, choose wisely. \n");
+    console.log("\x1b[36m\n***(Press 'ctrl+c' at any time to stop.)*** \x1b[37m\n");
+    drawMan();
 
-    // Carl, take this out before finalizing. 
-    console.log("\n  157-158 ... '" + hiddenWord + "' is the magic word. (I'll hide it later.)\n ");
 
     let wordToGuess = [];
 
@@ -150,12 +150,10 @@ function startgame() {
     let wrongGuess = 6;
 
     while (wrongGuess !== 0) {
-        console.log("player guesses", wrongGuess);
+        console.log("You have " + wrongGuess + " incorrect guesses left. ");
         const foundWord = wordToGuess.find(function(element) {
             return element === "_";
         });
-
-
 
 
         const userInput = prompt.question("\n" + userName + ", please guess a letter: ");
@@ -163,12 +161,10 @@ function startgame() {
         let letter = letterA[0];
         if (/[a-zA-Z]/.test(letter)) {
             console.log("\n You selected " + letter + ".\n");
-            // break;
         } else {
-            console.log("\n Sorry " + userName + " you must select alphabet characters (a-z) only. ");
-            break;
+            console.log("\n Sorry " + userName + " you must select alphabet characters " + "\x1b[5m (a-z)" + "\x1b[37m only. ");
+            ++wrongGuess;
         };
-
 
 
         if (alreadyguessed.includes(letter)) {
@@ -191,16 +187,18 @@ function startgame() {
                 }
             });
 
+
             if (isWrongGuess) {
-                console.log("Sorry " + userName + ", that was not correct. \n");
+                console.log("\x1b[31mSorry, " + userName + ", that was not correct.  \n \x1b[37m  ");
                 --wrongGuess;
                 drawMan(wrongGuess);
             }
             if (!isWrongGuess) {
                 console.log(wordToGuess);
-                console.log("That was a good guess! \n");
+                console.log("\x1b[32m  That was a good guess! \x1b[37m \n");
             }
         };
+
 
         lookForLetterInWord2();
         if (wordToGuess.join('') === hiddenWord) {
@@ -213,20 +211,20 @@ function startgame() {
     };
 
 
-    console.log("That is the end of this round.");
-    drawMan(wrongGuess);
+    console.log("That is the end of this round. \n");
 
-    console.log("\n(The hidden word was " + hiddenWord + ".) \n\n");
+    console.log("\n\n---(The hidden word was: " + "\x1b[35m" + hiddenWord + "\x1b[37m.) ");
+    console.log("Admit it " + userName + ", you had fun, right..??")
     gamesPlayed++;
 
-    console.log(userName + ", so far, you have won " + gamesWon + ", out of " + gamesPlayed + " games played.");
-    console.log("Would you like to play another exciting round? ")
+    console.log("\nSo, " + userName + ", so far, you have won " + gamesWon + ", out of " + gamesPlayed + " games played.");
+    console.log("    Would you like to play another exciting round? ")
 
 
-    if (readlineSync.keyInYNStrict("     Hit Y or N. ")) {
+    if (readlineSync.keyInYNStrict("        Hit Y or N. ")) {
         startgame();
     } else {
-        console.log("\n\n...sadness.\n   I'll miss you " + userName + "!")
+        console.log(" \x1b[33m  \n\n...sadness.\n   I'll miss you " + userName + "!")
         console.log("\nThis concludes our time together.\n    Goodbye. \n\n\n");
     }
 };
